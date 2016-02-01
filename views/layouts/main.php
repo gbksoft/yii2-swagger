@@ -22,7 +22,7 @@ SwaggerAsset::register($this);
       if (url && url.length > 1) {
         url = decodeURIComponent(url[1]);
       } else {
-        url = "<?= $this->context->module[gbksoft\modules\swagger\Module::MODULE_ID]->swaggerPath ?>";
+        url = "<?= $this->context->module->swaggerPath ?>";
       }
 
       // Pre load translate...
