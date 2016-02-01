@@ -42,8 +42,5 @@ class SwaggerAsset extends AssetBundle
         'lib/swagger-oauth.js',
         'lib/apihistory.js',
     ];
-    public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
-    ];
+    public $depends = [];
 }
