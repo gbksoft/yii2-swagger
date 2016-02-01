@@ -44,8 +44,11 @@ class Module extends \yii\base\Module implements BootstrapInterface
         \Yii::configure($this, require(__DIR__ . '/config.php'));
     }
     
-    public function bootstrap()
+    /**
+     * @inheritdoc
+     */
+    public function bootstrap($app)
     {
-        return parent::bootstrap();
+        // pass
     }
 }
