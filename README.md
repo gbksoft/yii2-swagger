@@ -23,4 +23,14 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-To be continue...
+```
+...
+    'modules' => [
+        'swagger' => [
+            'class' => 'gbksoft\modules\swagger\Module',
+            'swaggerUrl' => '/api/web/swagger/swagger.json',
+            'swaggerPath' => __DIR__ . '/../../api/web/swagger/swagger.json',
+        ],
+    ],
+...
+```
