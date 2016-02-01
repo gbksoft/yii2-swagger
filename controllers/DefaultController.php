@@ -45,6 +45,6 @@ class DefaultController extends Controller
     
     public function actionIndex()
     {
-        $this->render();
+        $this->render('index');
     }
 }
