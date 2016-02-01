@@ -9,6 +9,7 @@ use gbksoft\modules\swagger\SwaggerAsset;
 SwaggerAsset::register($this);
 $apiHistoryUrl = '/swagger/default/history';
 $js = <<<JS
+    $(function () {
     window.API_HISTORY_URL = "{$apiHistoryUrl}";
     var url = window.location.search.match(/url=([^&]+)/);
     if (url && url.length > 1) {
@@ -78,8 +79,9 @@ $js = <<<JS
         console.log.apply(console, arguments);
       }
     }
+    });
 JS;
-$this->registerJs($js, View::POS_READY);
+$this->registerJs($js, View::POS_END);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
