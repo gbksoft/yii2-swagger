@@ -1,0 +1,14 @@
+.tags {
+  text-align: right;
+  padding-top: 10px;
+}
+.tags span {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #89BF04;
+  color: #fff;
+  border-radius: 3px;
+  margin: 0 0 5px 5px;
+  font-weight: bold;
+  font-size: 12px;
+}

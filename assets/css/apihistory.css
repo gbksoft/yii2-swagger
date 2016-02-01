@@ -1,0 +1,40 @@
+.log-wrap {
+padding-top: 30px;
+}
+.log-wrap h2 {
+    color: #333;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.wrap-log {
+  margin-bottom: 10px;
+}
+.wrap-log .log-item {
+  padding-top: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+}
+.wrap-log .log-item .log-hash {
+  color: #C4A000;
+  font-weight: bold;
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 5px;
+  cursor:pointer;
+}
+.wrap-log .log-item .log-date {
+  display: inline-block;
+  vertical-align: middle;
+  margin-bottom: 5px;
+  color: #888;
+}
+.wrap-log .log-item .log-short-comment {
+  margin-bottom: 5px;
+  color: #333;
+}
+.wrap-log .log-item .log-full-comment {
+  margin-bottom: 5px;
+  font-size: 16px;
+  line-height: 1.2;
+}
