@@ -15,6 +15,14 @@ class DefaultController extends Controller
     /**
      * @inheritdoc
      */
+    public $layout = 'main';
+    /**
+     * @var \gbksoft\modules\swagger\Module
+     */
+    public $module;
+    /**
+     * @inheritdoc
+     */
     public function actions()
     {
         return [
