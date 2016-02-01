@@ -9,12 +9,12 @@ use gbksoft\modules\swagger\SwaggerAsset;
 SwaggerAsset::register($this);
 $apiHistoryUrl = '/swagger/default/history';
 $js = <<<JS
-    window.API_HISTORY_URL = {}
+    window.API_HISTORY_URL = "{$apiHistoryUrl}";
     var url = window.location.search.match(/url=([^&]+)/);
     if (url && url.length > 1) {
       url = decodeURIComponent(url[1]);
     } else {
-      url = "{$this->context->module->swaggerPath}";
+      url = "{$this->context->module->swaggerUrl}";
     }
 
     // Pre load translate...

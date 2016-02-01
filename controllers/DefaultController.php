@@ -58,8 +58,13 @@ class DefaultController extends Controller
     
     public function actionHistory()
     {
+        $pathToJson = $this->module->swaggerPath;
+        
+        // set executble external!!!
+        @chmod(__DIR__ . '/../ansi2html.sh', 0755);
+        
         if (isset($_GET['c']) and !empty($_GET['c'])) {
-            echo passthru("cd ". __DIR__ ."; git log --color -p -1 ". $_GET['c'] ." -- ./swagger.json | ./ansi2html.sh");
+            echo passthru("cd " . dirname($pathToJson) . "; git log --color -p -1 ". $_GET['c'] ." -- ./" . basename($pathToJson) . " | " . __DIR__ . "/../ansi2html.sh");
             die;
         }
 
@@ -69,7 +74,7 @@ class DefaultController extends Controller
         $format .= '<div class="log-short-comment">%s</div>';
         $format .= '<div class="log-full-comment">%b</div>';
         $format .= '</div>';
-        echo passthru("cd ". __DIR__ ."; git log --color  --pretty=format:\"".$format."\"  --no-merges -10 -- ./swagger.json");
+        echo passthru("cd ". dirname($pathToJson) ."; git log --color  --pretty=format:\"".$format."\"  --no-merges -10 -- ./" . basename($pathToJson));
         Yii::$app->end();
     }
 }

@@ -25,7 +25,9 @@ class Module extends \yii\base\Module implements BootstrapInterface
      * @inheritdoc
      */
     public $controllerNamespace = 'gbksoft\modules\swagger\controllers';
+    
     public $swaggerPath;
+    public $swaggerUrl;
 
     /**
      * Class extended yii\web\IdentityInterface interface
