@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 $(function(){
-    $('#apihistory').load('apihistory.php');
+    $('#apihistory').load(window.API_HISTORY_URL);
     $('#apihistory').on('click','.log-item .log-hash',function(){
         var el = $(this);
         var hash = $(this).text();

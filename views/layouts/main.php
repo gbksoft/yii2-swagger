@@ -7,7 +7,9 @@ use gbksoft\modules\swagger\SwaggerAsset;
 /* @var $content string */
 
 SwaggerAsset::register($this);
+$apiHistoryUrl = '/swagger/default/history';
 $js = <<<JS
+    window.API_HISTORY_URL = {}
     var url = window.location.search.match(/url=([^&]+)/);
     if (url && url.length > 1) {
       url = decodeURIComponent(url[1]);

@@ -55,4 +55,21 @@ class DefaultController extends Controller
     {
         return $this->render('index');
     }
+    
+    public function actionHistory()
+    {
+        if (isset($_GET['c']) and !empty($_GET['c'])) {
+            echo passthru("cd ". __DIR__ ."; git log --color -p -1 ". $_GET['c'] ." -- ./swagger.json | ./ansi2html.sh");
+            die;
+        }
+
+        $format = '<div class="log-item">';
+        $format .= '<span class="log-hash">%h</span>';
+        $format .= '<span class="log-date">%ad</span>';
+        $format .= '<div class="log-short-comment">%s</div>';
+        $format .= '<div class="log-full-comment">%b</div>';
+        $format .= '</div>';
+        echo passthru("cd ". __DIR__ ."; git log --color  --pretty=format:\"".$format."\"  --no-merges -10 -- ./swagger.json");
+        Yii::$app->end();
+    }
 }
