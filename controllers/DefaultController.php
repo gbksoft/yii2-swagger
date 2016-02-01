@@ -1,6 +1,7 @@
 <?php
 namespace gbksoft\modules\swagger\controllers;
 
+use Yii;
 use yii\helpers\ArrayHelper;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -44,7 +45,7 @@ class DefaultController extends Controller
                     [
                         'allow' => true,
                         'roles' => ['?'],
-                        'actions' => ['index'],
+                        'actions' => ['index', 'history'],
                     ],
                 ],
             ],
