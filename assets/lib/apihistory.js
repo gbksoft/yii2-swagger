@@ -18,7 +18,7 @@ $(function(){
             'id': hash,
         })
                 .addClass('log-diff')
-                .load('apihistory.php?c='+hash)
+                .load(window.API_HISTORY_URL + '?c='+hash)
                 .appendTo(el.parent());
     });
 });
