@@ -127,7 +127,7 @@ class DefaultController extends Controller
         $response->getHeaders()->set('Content-Type', 'application/json; charset=UTF-8');
         
         // Trigger events
-        $this->module->trigger(Module::EVENT_BEFORE_JSON, new Event($json));
+        $this->module->trigger(Module::EVENT_BEFORE_JSON, new Event(['data' => &$json]));
         
         return $json;
     }
