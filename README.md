@@ -39,7 +39,7 @@ Module url rules
 -----
 
 ```
-swagger/     <== Main swagger page
-swagger/default/json <== Get swagger.json file with replacements
-swagger/default/history <== Get swagger.json file with replacements
+swagger/                <== Main swagger page
+swagger/default/json    <== Get swagger.json file with replacements
+swagger/default/history <== Get git logs history (included in bottom on main swagger page)
 ```

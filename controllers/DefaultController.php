@@ -49,7 +49,7 @@ class DefaultController extends Controller
                     [
                         'allow' => true,
                         'roles' => ['?'],
-                        'actions' => ['index', 'history'],
+                        'actions' => ['index', 'history', 'json'],
                     ],
                 ],
             ],
