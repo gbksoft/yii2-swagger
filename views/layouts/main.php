@@ -1,20 +1,24 @@
 <?php
 use yii\web\View;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use gbksoft\modules\swagger\SwaggerAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
 SwaggerAsset::register($this);
-$apiHistoryUrl = '/swagger/default/history';
+
+$this->registerJs("window.API_HISTORY_URL = '" . Url::toRoute('history') . "';", View::POS_HEAD);
+$this->registerJs("window.API_JSON_URL = '" . Url::toRoute('json') . "';", View::POS_HEAD);
+
 $js = <<<JS
-    $(function () {
+$(function () {
     var url = window.location.search.match(/url=([^&]+)/);
     if (url && url.length > 1) {
       url = decodeURIComponent(url[1]);
     } else {
-      url = "{$this->context->module->swaggerUrl}";
+      url = window.API_JSON_URL;
     }
 
     // Pre load translate...
@@ -78,9 +82,8 @@ $js = <<<JS
         console.log.apply(console, arguments);
       }
     }
-    });
+});
 JS;
-$this->registerJs("window.API_HISTORY_URL = '" . $apiHistoryUrl . "';", View::POS_HEAD);
 $this->registerJs($js, View::POS_END);
 ?>
 <?php $this->beginPage() ?>

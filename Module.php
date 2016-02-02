@@ -21,6 +21,7 @@ use yii\web\ForbiddenHttpException;
 class Module extends \yii\base\Module implements BootstrapInterface
 {
     const MODULE_ID = 'swagger';
+    const EVENT_BEFORE_JSON = 'beforeJson';
     /**
      * @inheritdoc
      */
