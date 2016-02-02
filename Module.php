@@ -29,6 +29,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
     
     public $swaggerPath;
     public $swaggerUrl;
+    public $swaggerReplace;
 
     /**
      * Class extended yii\web\IdentityInterface interface
