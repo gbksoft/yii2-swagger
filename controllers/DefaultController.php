@@ -131,7 +131,7 @@ class DefaultController extends Controller
         // Trigger events
         $event = new BeforeJsonEvent;
         $event->responseText = $json;
-        $this->trigger(self::EVENT_BEFORE_JSON, $event);
+        $this->module->trigger(self::EVENT_BEFORE_JSON, $event);
         
         return $event->responseText;
     }
