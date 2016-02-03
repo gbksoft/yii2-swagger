@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use gbksoft\modules\swagger\Module;
+use gbksoft\modules\swagger\components\BeforeJsonEvent;
 
 /**
  * Class DefaultController
@@ -17,6 +18,7 @@ use gbksoft\modules\swagger\Module;
  */
 class DefaultController extends Controller
 {
+    const EVENT_BEFORE_JSON = 'beforeJson';
     /**
      * @inheritdoc
      */
@@ -127,8 +129,10 @@ class DefaultController extends Controller
         $response->getHeaders()->set('Content-Type', 'application/json; charset=UTF-8');
         
         // Trigger events
-        $this->module->trigger(Module::EVENT_BEFORE_JSON, new Event(['data' => &$json]));
+        $event = new BeforeJsonEvent;
+        $event->responseText = $json;
+        $this->trigger(self::EVENT_BEFORE_JSON, $event);
         
-        return $json;
+        return $event->responseText;
     }
 }
