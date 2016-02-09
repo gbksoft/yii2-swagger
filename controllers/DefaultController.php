@@ -76,7 +76,7 @@ class DefaultController extends Controller
         $pathToJson = $this->module->swaggerPath;
         
         // set executable external!!!
-        @chmod(__DIR__ . '/../ansi2html.sh', 0755);
+        // @chmod(__DIR__ . '/../ansi2html.sh', 0755);
         
         if (isset($_GET['c']) and !empty($_GET['c'])) {
             echo passthru("cd " . dirname($pathToJson) . "; git log --color -p -1 ". $_GET['c'] ." -- ./" . basename($pathToJson) . " | " . __DIR__ . "/../ansi2html.sh");
