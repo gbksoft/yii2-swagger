@@ -679,13 +679,15 @@ this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function
   return "deprecated";
   },"3":function(depth0,helpers,partials,data) {
   var stack1, buffer = "          <div class=\"tags\">\n";
-  stack1 = helpers.each.call(depth0, ((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.tags : stack1), {"name":"each","hash":{},"fn":this.program(4, data),"inverse":this.noop,"data":data});
+  stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.tagItems : depth0), {"name":"each","hash":{},"fn":this.program(4, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "          </div>\n";
 },"4":function(depth0,helpers,partials,data) {
   var lambda=this.lambda, escapeExpression=this.escapeExpression;
-  return "                  <span>"
-    + escapeExpression(lambda(depth0, depth0))
+  return "                  <span class=\""
+    + escapeExpression(lambda((depth0 != null ? depth0.color : depth0), depth0))
+    + "\">"
+    + escapeExpression(lambda((depth0 != null ? depth0.name : depth0), depth0))
     + "</span>\n";
 },"6":function(depth0,helpers,partials,data) {
   return "            <h4><span data-sw-translate>Warning: Deprecated</span></h4>\n";
@@ -784,7 +786,7 @@ this["Handlebars"]["templates"]["operation"] = Handlebars.template({"1":function
     + "_"
     + escapeExpression(((helper = (helper = helpers.nickname || (depth0 != null ? depth0.nickname : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"nickname","hash":{},"data":data}) : helper)))
     + "_content' style='display:none'>\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.operation : depth0)) != null ? stack1.tags : stack1), {"name":"if","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.tagItems : depth0), {"name":"if","hash":{},"fn":this.program(3, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.deprecated : depth0), {"name":"if","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
@@ -25207,7 +25209,19 @@ SwaggerUi.Views.MainView = Backbone.View.extend({
         this.model.definitions[def].type = 'object';
       }
     }
-
+    // colors workin
+    var colorsArray = this.model.swaggerObject.tags;
+    var indexCount = 0;
+    $(colorsArray).each(function(key, elem){
+      if(indexCount <= 18) {
+        elem.color = "color-"+indexCount;
+        indexCount++;
+      }else{
+        elem.color = "color-"+indexCount;
+        indexCount = 0;
+      };
+    });
+    this.model.swaggerObject.tags = colorsArray;
   },
 
   render: function(){
@@ -25296,12 +25310,12 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
 
   initialize: function(opts) {
     opts = opts || {};
+
     this.router = opts.router;
     this.auths = opts.auths;
     this.parentId = this.model.parentId;
     this.nickname = this.model.nickname;
     this.model.encodedParentId = encodeURIComponent(this.parentId);
-
     if (opts.swaggerOptions) {
       this.model.defaultRendering = opts.swaggerOptions.defaultModelRendering;
 
@@ -25309,6 +25323,25 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
         this.model.showRequestHeaders = true;
       }
     }
+
+    // tags color
+    var tagsArray = this.model.operation.tags,
+        globalTagsArray = this.router.api.swaggerObject.tags,
+        tempObj = {};
+
+    $(tagsArray).each(function(key, elem){
+      $(globalTagsArray).each(function(a,b){
+        if(elem == b.name) {
+          //tempItem.name = b.name;
+          //tempItem.color = b.color;
+          tempObj[key] = {
+            'name': b.name,
+            'color': b.color
+          }
+        }
+      });
+    });
+    this.model.tagItems = tempObj;
     return this;
   },
 

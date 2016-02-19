@@ -12,3 +12,63 @@
   font-weight: bold;
   font-size: 12px;
 }
+.tags span.color-0 {
+  background: red;
+}
+.tags span.color-1 {
+  background: green;
+}
+.tags span.color-2 {
+  background: blue;
+}
+.tags span.color-3 {
+  background: aquamarine;
+}
+.tags span.color-4 {
+  background: orange;
+}
+.tags span.color-5 {
+  background: gray;
+}
+.tags span.color-6 {
+  background: purple;
+}
+.tags span.color-7 {
+  background: saddlebrown;
+}
+.tags span.color-8 {
+  background: sandybrown;
+}
+.tags span.color-9 {
+  background: pink;
+}
+.tags span.color-10 {
+  background: midnightblue;
+}
+.tags span.color-11 {
+  background: black;
+}
+.tags span.color-12 {
+  background: darkred;
+}
+.tags span.color-13 {
+  background: darkcyan;
+}
+.tags span.color-14 {
+  background: darkslateblue;
+}
+.tags span.color-15 {
+  background: lightcoral;
+}
+.tags span.color-16 {
+  background: dodgerblue;
+}
+.tags span.color-17 {
+  background: yellow;
+}
+.tags span.color-18 {
+  background: springgreen;
+}
+.tags span.color-19 {
+  background: darkolivegreen;
+}
