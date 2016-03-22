@@ -248,3 +248,57 @@ h2 {
   font-weight: bold;
   color: #08b;
 }
+
+.swagger-helper {
+    position: fixed;
+    top: 56px;
+    right: 4%;
+    margin: 0;
+    padding: 1em;
+    border: 2px solid light-gray;
+    border-radius: 3px;
+    background-color: rgba(137, 191, 4, 0.6);
+    font-family: Ubuntu,Verdana;
+    font-size: 14px;
+}
+#header.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(137, 191, 4, 0.6);
+}
+#header-toggler {
+    display: block;
+    padding: 8px;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    background: #CCEF76;
+    color: black;
+}
+#header-toggler:active {
+    position: relative;
+    top: 1px;
+    background: #A7C758;
+}
+.opened-method {
+    display: block;
+    margin: 4px 0 0 0;
+    padding: 4px;
+    background: white;
+    border-radius: 3px;
+    color: green;
+    text-decoration: none;
+    font-size: 12px;
+}
+.opened-method small {
+    display:block;
+    margin:2px 0 0 0;
+    font-size:11px;
+    font-style:italic;
+    color: darkgray;
+}
+.opened-method:active {
+    color: green;
+}
