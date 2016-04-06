@@ -24,8 +24,8 @@ class SwaggerAsset extends AssetBundle
         'css/screen.css',
         'css/tags.css',
         'css/reset.css',
-        'css/style.css',
-        // 'css/print.css',
+//        'css/style.css',
+//        'css/print.css',
         'css/apihistory.css',
     ];
     public $js = [
