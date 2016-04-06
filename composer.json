@@ -2,7 +2,7 @@
   "name": "gbksoft/yii2-swagger",
   "description": "Yii 2 wrapper for Swagger",
   "type": "yii2-extension",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "keywords": [
     "yii2",
     "extension",
