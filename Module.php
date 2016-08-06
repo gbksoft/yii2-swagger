@@ -1,22 +1,14 @@
 <?php
 /**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * Copyright © 2016 GBKSOFT. Web and Mobile Software Development.
+ * See LICENSE.txt for license details.
  */
-
 namespace gbksoft\modules\swagger;
 
-use Yii;
 use yii\base\BootstrapInterface;
-use yii\web\ForbiddenHttpException;
 
 /**
  * This is the main module class for the Swagger module.
- *
- *
- * @author Hryhorii Furletov <littlefuntik@gmail.com>
- * @since 2.0
  */
 class Module extends \yii\base\Module implements BootstrapInterface
 {

@@ -1,28 +1,30 @@
 {
-  "name": "gbksoft/yii2-swagger",
-  "description": "Yii 2 wrapper for Swagger",
-  "type": "yii2-extension",
-  "version": "1.0.4",
-  "keywords": [
-    "yii2",
-    "extension",
-    "module",
-    "swagger"
-  ],
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Hryhorii Furletov",
-      "email": "littlefuntik@gmail.com"
+    "name": "gbksoft/yii2-swagger",
+    "description": "Yii 2 wrapper for Swagger",
+    "type": "yii2-extension",
+    "version": "1.0.4",
+    "keywords": [
+        "yii2",
+        "extension",
+        "module",
+        "swagger"
+    ],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+        "yiisoft/yii2": ">=2.0.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "gbksoft\\modules\\swagger\\": ""
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "tests\\": ""
+        }
     }
-  ],
-  "minimum-stability": "dev",
-  "require": {
-    "yiisoft/yii2": ">=2.0.4"
-  },
-  "autoload": {
-    "psr-4": {
-      "gbksoft\\modules\\swagger\\": ""
-    }
-  }
 }

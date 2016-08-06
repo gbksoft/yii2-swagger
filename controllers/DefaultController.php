@@ -1,32 +1,41 @@
 <?php
+/**
+ * Copyright © 2016 GBKSOFT. Web and Mobile Software Development.
+ * See LICENSE.txt for license details.
+ */
 namespace gbksoft\modules\swagger\controllers;
 
-use Yii;
-use yii\base\Event;
-use yii\helpers\ArrayHelper;
+use gbksoft\modules\swagger\components\BeforeJsonEvent;
+use gbksoft\modules\swagger\components\shell\Command;
+use gbksoft\modules\swagger\components\shell\Command\Argument;
+use gbksoft\modules\swagger\components\shell\Command\Flag;
+use gbksoft\modules\swagger\components\shell\Command\Option;
+use gbksoft\modules\swagger\components\shell\CommandBuilder;
+use gbksoft\modules\swagger\Module;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
+use yii\web\ErrorAction;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use gbksoft\modules\swagger\Module;
-use gbksoft\modules\swagger\components\BeforeJsonEvent;
 
 /**
  * Class DefaultController
- * 
- * @package gbksoft\tokens\controllers
  */
 class DefaultController extends Controller
 {
     const EVENT_BEFORE_JSON = 'beforeJson';
+
     /**
      * @inheritdoc
      */
     public $layout = 'main';
+
     /**
-     * @var \gbksoft\modules\swagger\Module
+     * @var Module
      */
     public $module;
+
     /**
      * @inheritdoc
      */
@@ -34,7 +43,7 @@ class DefaultController extends Controller
     {
         return [
             'error' => [
-                'class' => 'yii\web\ErrorAction',
+                'class' => ErrorAction::class,
             ],
         ];
     }
@@ -46,7 +55,7 @@ class DefaultController extends Controller
     {
         return ArrayHelper::merge(parent::behaviors(), [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -73,39 +82,76 @@ class DefaultController extends Controller
      */
     public function actionHistory()
     {
+        $builder = new CommandBuilder();
+        $hash = \Yii::$app->request->get('c');
         $pathToJson = $this->module->swaggerPath;
-        
+
+
         // set executable external!!!
         // @chmod(__DIR__ . '/../ansi2html.sh', 0755);
-        
-        if (isset($_GET['c']) and !empty($_GET['c'])) {
-            echo passthru("cd " . dirname($pathToJson) . "; git log --color -p -1 ". $_GET['c'] ." -- ./" . basename($pathToJson) . " | " . __DIR__ . "/../ansi2html.sh");
-            die;
+
+        if ($hash && preg_match('#[a-z0-9]{4,40}#', $hash)) {
+            $commands = [];
+            $commands[] = $builder->setCommand(new Command('cd'))
+                ->addArgument(new Argument(dirname($pathToJson)))
+                ->build();
+
+            $commands[] = $builder->setCommand(new Command('git'))
+                ->addArgument(new Argument('log'))
+                ->addFlag(new Flag('--color'))
+                ->addFlag(new Flag('-p'))
+                ->addFlag(new Flag('-1'))
+                ->addArgument(new Argument($hash))
+                ->addFlag(new Flag('--'))
+                ->addArgument(new Argument('./' . basename($pathToJson)))
+                ->build();
+
+            $result = shell_exec(implode('; ', $commands) . ' | ' . __DIR__ . '/../ansi2html.sh');
+            echo $result;
+            \Yii::$app->end();
         }
 
-        $format = '<div class="log-item">';
-        $format .= '<span class="log-hash">%h</span>';
-        $format .= '<span class="log-date">%ad</span>';
-        $format .= '<div class="log-short-comment">%s</div>';
-        $format .= '<div class="log-full-comment">%b</div>';
-        $format .= '</div>';
-        echo passthru("cd ". dirname($pathToJson) ."; git log --color  --pretty=format:\"".$format."\"  --no-merges -10 -- ./" . basename($pathToJson));
-        Yii::$app->end();
+        $format = '<tr class="log-item">';
+        $format .= '<td class="log-hash">%h</td>';
+        $format .= '<td class="log-date">%ad</td>';
+        $format .= '<td class="log-short-comment">%s</td>';
+        $format .= '<td class="log-full-comment">%b</td>';
+        $format .= '</tr>';
+
+        $commands = [];
+
+        $commands[] = $builder->setCommand(new Command('cd'))
+            ->addArgument(new Argument(dirname($pathToJson)))
+            ->build();
+
+        $commands[] = $builder->setCommand(new Command('git'))
+            ->addArgument(new Argument('log'))
+            ->addFlag(new Flag('--color'))
+            ->addOption(new Option('--pretty', 'format:' . $format))
+            ->addFlag(new Flag('--no-merges'))
+            ->addFlag(new Flag('-10'))
+            ->addFlag(new Flag('--'))
+            ->addArgument(new Argument('./' . basename($pathToJson)))
+            ->build();
+        echo '<table>';
+        echo stripslashes(shell_exec(implode('; ', $commands)));
+        echo '</table>';
+        \Yii::$app->end();
     }
-    
+
     /**
-     * Parse swagger.json file, do replacements
-     * and return json
-     * 
+     * Parse swagger.json file, do replacements and return json
+     *
      * @return string
+     * @throws NotFoundHttpException
      */
     public function actionJson()
     {
         /** @var \yii\web\Response */
-        $response = Yii::$app->getResponse();
+        $response = \Yii::$app->getResponse();
         
         if (!is_readable($this->module->swaggerPath)) {
-            throw new NotFoundHttpException;
+            throw new NotFoundHttpException();
         }
         
         // Read source json file

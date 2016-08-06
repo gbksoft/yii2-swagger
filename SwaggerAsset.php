@@ -1,8 +1,7 @@
 <?php
 /**
- * @link http://www.yiiframework.com/
- * @copyright Copyright (c) 2008 Yii Software LLC
- * @license http://www.yiiframework.com/license/
+ * Copyright © 2016 GBKSOFT. Web and Mobile Software Development.
+ * See LICENSE.txt for license details.
  */
 
 namespace gbksoft\modules\swagger;
@@ -11,9 +10,6 @@ use yii\web\AssetBundle;
 
 /**
  * Swagger asset bundle
- *
- * @author Hryhorii Furletov <littlefuntik@gmail.com>
- * @since 2.0
  */
 class SwaggerAsset extends AssetBundle
 {
@@ -24,8 +20,6 @@ class SwaggerAsset extends AssetBundle
         'css/screen.css',
         'css/tags.css',
         'css/reset.css',
-//        'css/style.css',
-//        'css/print.css',
         'css/apihistory.css',
     ];
     public $js = [
